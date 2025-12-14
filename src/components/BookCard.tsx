@@ -25,9 +25,7 @@ const BookCard: React.FC<BookCardProps> = ({
   const handleMarkAsRead = () => {
     if (book.status === 'to-read') {
       setShowQuickRate(true);
-    } else {
-      onMarkAsToRead(book.id);
-    }
+    } 
   };
 
   const submitQuickRate = () => {
@@ -138,7 +136,7 @@ const BookCard: React.FC<BookCardProps> = ({
                     : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
                 }`}
               >
-                {book.status === 'read' ? (
+                {/* {book.status === 'read' ? (
                   <>
                     <CheckCircle className="h-3 w-3 mr-1" />
                     Mark as To Read
@@ -148,7 +146,7 @@ const BookCard: React.FC<BookCardProps> = ({
                     <BookMarked className="h-3 w-3 mr-1" />
                     Mark as Read
                   </>
-                )}
+                )} */}
               </button>
 
               {book.status === 'read' && book.rating && (
@@ -161,14 +159,14 @@ const BookCard: React.FC<BookCardProps> = ({
             <div className="flex flex-col items-end space-y-1 text-xs text-gray-500">
               {book.status === 'read' && book.dateReadTimestamp ? (
                 <>
-                  <div className="flex items-center">
+                  {/* <div className="flex items-center">
                     <CheckCircle className="h-3 w-3 mr-1" />
                     <span>Finished {formatDateTime(book.dateReadTimestamp).date}</span>
-                  </div>
-                  <div className="flex items-center">
+                  </div> */}
+                  {/* <div className="flex items-center">
                     <Clock className="h-3 w-3 mr-1" />
                     <span>at {formatDateTime(book.dateReadTimestamp).time}</span>
-                  </div>
+                  </div> */}
                 </>
               ) : book.status === 'read' && book.dateRead ? (
                 <div className="flex items-center">
