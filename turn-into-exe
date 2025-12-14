@@ -1,0 +1,5 @@
+# 1. use electron
+# 2. npm install --save-dev electron
+# 3. npm run build - if not built already
+# 4. npm start - to test locally before making an exe
+# 5. npm run dist - to make an exe
