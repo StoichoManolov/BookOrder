@@ -6,10 +6,10 @@ export interface Book {
   pages: number;
   status: 'to-read' | 'read';
   rating?: number;
-  notes?: string;
+  summary?: string;
   dateAdded: string;
   dateRead?: string;
-  dateReadTimestamp?: string; // New field for exact datetime when marked as read
+  dateReadTimestamp?: string;
   coverColor: string;
   imageUrl?: string;
 }

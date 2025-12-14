@@ -17,7 +17,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
     pages: '',
     status: 'to-read' as 'to-read' | 'read',
     rating: 0,
-    notes: '',
+    summary: '',
     dateRead: '',
     imageUrl: '',
   });
@@ -33,7 +33,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
         pages: book.pages.toString(),
         status: book.status,
         rating: book.rating || 0,
-        notes: book.notes || '',
+        summary: book.summary || '',
         dateRead: book.dateRead || '',
         imageUrl: book.imageUrl || '',
       });
@@ -66,7 +66,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
       pages: parseInt(formData.pages),
       status: formData.status,
       rating: formData.status === 'read' && formData.rating > 0 ? formData.rating : undefined,
-      notes: formData.notes.trim() || undefined,
+      summary: formData.summary.trim() || undefined,
       dateRead: formData.status === 'read' && formData.dateRead ? formData.dateRead : undefined,
       dateReadTimestamp: formData.status === 'read' && !book?.dateReadTimestamp ? new Date().toISOString() : book?.dateReadTimestamp,
       imageUrl: formData.imageUrl || undefined,
@@ -95,11 +95,11 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-      <div className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6">
         <h2 className="text-2xl font-bold text-white">
           {book ? 'Edit Book' : 'Add New Book'}
         </h2>
-        <p className="text-indigo-100 mt-1">
+        <p className="text-blue-100 mt-1">
           {book ? 'Update book information' : 'Add a new book to your collection'}
         </p>
       </div>
@@ -125,7 +125,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
                   type="text"
                   value={formData.title}
                   onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                     errors.title ? 'border-red-300 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="Enter book title"
@@ -141,7 +141,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
                   type="text"
                   value={formData.author}
                   onChange={(e) => setFormData({ ...formData, author: e.target.value })}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                     errors.author ? 'border-red-300 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="Enter author name"
@@ -157,7 +157,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
                   type="text"
                   value={formData.genre}
                   onChange={(e) => setFormData({ ...formData, genre: e.target.value })}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                     errors.genre ? 'border-red-300 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="e.g., Fiction, Science Fiction, Biography"
@@ -173,7 +173,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
                   type="number"
                   value={formData.pages}
                   onChange={(e) => setFormData({ ...formData, pages: e.target.value })}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors ${
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
                     errors.pages ? 'border-red-300 bg-red-50' : 'border-gray-300'
                   }`}
                   placeholder="Number of pages"
@@ -189,7 +189,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
                 <select
                   value={formData.status}
                   onChange={(e) => setFormData({ ...formData, status: e.target.value as 'to-read' | 'read' })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="to-read">To Read</option>
                   <option value="read">Read</option>
@@ -214,7 +214,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
                     type="date"
                     value={formData.dateRead}
                     onChange={(e) => setFormData({ ...formData, dateRead: e.target.value })}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   />
                   <p className="mt-1 text-xs text-gray-500">
                     Note: The exact completion time will be recorded automatically when you mark a book as read.
@@ -225,21 +225,24 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Notes (optional)
+                Summary (optional)
               </label>
               <textarea
-                value={formData.notes}
-                onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Your thoughts about this book..."
+                value={formData.summary}
+                onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
+                rows={6}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-serif leading-relaxed"
+                placeholder="Write a detailed summary of this book... unlimited characters"
               />
+              <p className="mt-1 text-xs text-gray-500">
+                Add your thoughts, key takeaways, or a detailed synopsis. No character limit.
+              </p>
             </div>
 
             <div className="flex space-x-4 pt-4">
               <button
                 type="submit"
-                className="flex-1 flex items-center justify-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors font-medium"
+                className="flex-1 flex items-center justify-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium"
               >
                 <Save className="h-5 w-5 mr-2" />
                 {book ? 'Update Book' : 'Add Book'}

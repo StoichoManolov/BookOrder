@@ -26,7 +26,7 @@ const sampleBooks: Book[] = [
     pages: 180,
     status: 'read',
     rating: 4,
-    notes: 'A masterpiece of American literature',
+    summary: 'A masterpiece of American literature exploring themes of decadence, idealism, and social upheaval in the Jazz Age. The story primarily concerns the mysterious millionaire Jay Gatsby and his obsession with the beautiful Daisy Buchanan. Set in the summer of 1922, the novel is a critique of the American Dream.',
     dateAdded: '2024-01-15',
     dateRead: '2024-01-20',
     dateReadTimestamp: '2024-01-20T14:30:00.000Z',
@@ -52,7 +52,7 @@ const sampleBooks: Book[] = [
     pages: 376,
     status: 'read',
     rating: 5,
-    notes: 'Powerful story about justice and morality',
+    summary: 'A powerful story about justice and morality set in the Depression-era South. Through the eyes of Scout Finch, we witness her father Atticus defend a Black man falsely accused of assault, while learning profound lessons about prejudice, courage, and human dignity. The novel explores the destruction of innocence and the importance of standing up for what is right.',
     dateAdded: '2024-01-05',
     dateRead: '2024-01-12',
     dateReadTimestamp: '2024-01-12T19:45:00.000Z',
@@ -120,14 +120,14 @@ export const useBooks = () => {
     saveBooks(newBooks);
   };
 
-  const markAsRead = (id: string, rating?: number, notes?: string) => {
+  const markAsRead = (id: string, rating?: number, summary?: string) => {
     const now = new Date();
     updateBook(id, {
       status: 'read',
       dateRead: now.toISOString().split('T')[0],
       dateReadTimestamp: now.toISOString(),
       rating,
-      notes,
+      summary,
     });
   };
 

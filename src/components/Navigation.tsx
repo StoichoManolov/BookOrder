@@ -25,8 +25,8 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange, book
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2">
-            <BookOpen className="h-8 w-8 text-indigo-600" />
-            <h1 className="text-xl font-bold text-gray-900">BookShelf</h1>
+            <BookOpen className="h-8 w-8 text-blue-600" />
+            <h1 className="text-xl font-bold text-gray-900">My Library</h1>
           </div>
           
           <div className="hidden md:flex items-center space-x-1">
@@ -36,7 +36,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange, book
                 onClick={() => onPageChange(id)}
                 className={`flex items-center px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   currentPage === id
-                    ? 'bg-indigo-100 text-indigo-700 shadow-sm'
+                    ? 'bg-blue-100 text-blue-700 shadow-sm'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
                 }`}
               >
@@ -45,7 +45,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange, book
                 {count !== undefined && (
                   <span className={`ml-2 px-2 py-0.5 rounded-full text-xs font-semibold ${
                     currentPage === id
-                      ? 'bg-indigo-200 text-indigo-800'
+                      ? 'bg-blue-200 text-blue-800'
                       : 'bg-gray-200 text-gray-700'
                   }`}>
                     {count}
@@ -59,7 +59,7 @@ const Navigation: React.FC<NavigationProps> = ({ currentPage, onPageChange, book
             <select
               value={currentPage}
               onChange={(e) => onPageChange(e.target.value)}
-              className="rounded-lg border-gray-300 text-sm font-medium focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="rounded-lg border-gray-300 text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               {navItems.map(({ id, label, count }) => (
                 <option key={id} value={id}>

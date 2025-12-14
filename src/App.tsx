@@ -5,11 +5,15 @@ import Navigation from './components/Navigation';
 import Dashboard from './components/Dashboard';
 import BookList from './components/BookList';
 import BookForm from './components/BookForm';
+import BookDetails from './components/BookDetails';
+import SummaryModal from './components/SummaryModal';
 
 function App() {
   const { books, addBook, updateBook, deleteBook, markAsRead, markAsToRead } = useBooks();
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [editingBook, setEditingBook] = useState<Book | null>(null);
+  const [viewingBook, setViewingBook] = useState<Book | null>(null);
+  const [viewingSummary, setViewingSummary] = useState<Book | null>(null);
 
   // Calculate book counts for navigation
   const bookCounts = {
@@ -44,6 +48,14 @@ function App() {
     }
   };
 
+  const handleViewDetails = (book: Book) => {
+    setViewingBook(book);
+  };
+
+  const handleViewSummary = (book: Book) => {
+    setViewingSummary(book);
+  };
+
   // Listen for navigation events from components
   React.useEffect(() => {
     const handleNavigate = (event: any) => {
@@ -57,7 +69,13 @@ function App() {
   const renderCurrentPage = () => {
     switch (currentPage) {
       case 'dashboard':
-        return <Dashboard books={books} onPageChange={setCurrentPage} />;
+        return (
+          <Dashboard
+            books={books}
+            onPageChange={setCurrentPage}
+            onViewDetails={handleViewDetails}
+          />
+        );
       
       case 'all':
         return (
@@ -69,6 +87,8 @@ function App() {
             onDelete={handleDeleteBook}
             onMarkAsRead={markAsRead}
             onMarkAsToRead={markAsToRead}
+            onViewDetails={handleViewDetails}
+            onViewSummary={handleViewSummary}
           />
         );
       
@@ -82,6 +102,8 @@ function App() {
             onDelete={handleDeleteBook}
             onMarkAsRead={markAsRead}
             onMarkAsToRead={markAsToRead}
+            onViewDetails={handleViewDetails}
+            onViewSummary={handleViewSummary}
           />
         );
       
@@ -95,6 +117,8 @@ function App() {
             onDelete={handleDeleteBook}
             onMarkAsRead={markAsRead}
             onMarkAsToRead={markAsToRead}
+            onViewDetails={handleViewDetails}
+            onViewSummary={handleViewSummary}
           />
         );
       
@@ -110,20 +134,44 @@ function App() {
         );
       
       default:
-        return <Dashboard books={books} onPageChange={setCurrentPage} />;
+        return (
+          <Dashboard
+            books={books}
+            onPageChange={setCurrentPage}
+            onViewDetails={handleViewDetails}
+          />
+        );
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navigation 
-        currentPage={currentPage} 
+      <Navigation
+        currentPage={currentPage}
         onPageChange={setCurrentPage}
         bookCounts={bookCounts}
       />
       <main>
         {renderCurrentPage()}
       </main>
+
+      {viewingBook && (
+        <BookDetails
+          book={viewingBook}
+          onClose={() => setViewingBook(null)}
+          onEdit={(book) => {
+            setViewingBook(null);
+            handleEditBook(book);
+          }}
+        />
+      )}
+
+      {viewingSummary && (
+        <SummaryModal
+          book={viewingSummary}
+          onClose={() => setViewingSummary(null)}
+        />
+      )}
     </div>
   );
 }

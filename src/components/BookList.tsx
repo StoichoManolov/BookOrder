@@ -9,8 +9,10 @@ interface BookListProps {
   emptyMessage: string;
   onEdit: (book: Book) => void;
   onDelete: (id: string) => void;
-  onMarkAsRead: (id: string, rating?: number, notes?: string) => void;
+  onMarkAsRead: (id: string, rating?: number, summary?: string) => void;
   onMarkAsToRead: (id: string) => void;
+  onViewDetails?: (book: Book) => void;
+  onViewSummary?: (book: Book) => void;
 }
 
 const BookList: React.FC<BookListProps> = ({
@@ -21,6 +23,8 @@ const BookList: React.FC<BookListProps> = ({
   onDelete,
   onMarkAsRead,
   onMarkAsToRead,
+  onViewDetails,
+  onViewSummary,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('dateAdded');
@@ -101,7 +105,7 @@ const BookList: React.FC<BookListProps> = ({
                 placeholder="Search books, authors, or genres..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           </div>
@@ -111,7 +115,7 @@ const BookList: React.FC<BookListProps> = ({
             <select
               value={filterGenre}
               onChange={(e) => setFilterGenre(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="">All Genres</option>
               {genres.map(genre => (
@@ -129,7 +133,7 @@ const BookList: React.FC<BookListProps> = ({
                 setSortBy(field);
                 setSortOrder(order);
               }}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
               <option value="dateAdded-desc">Recently Added</option>
               <option value="dateAdded-asc">Oldest First</option>
@@ -149,8 +153,8 @@ const BookList: React.FC<BookListProps> = ({
             <button
               onClick={() => setViewMode('grid')}
               className={`px-4 py-3 ${
-                viewMode === 'grid' 
-                  ? 'bg-indigo-600 text-white' 
+                viewMode === 'grid'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-50'
               } transition-colors`}
             >
@@ -159,8 +163,8 @@ const BookList: React.FC<BookListProps> = ({
             <button
               onClick={() => setViewMode('list')}
               className={`px-4 py-3 ${
-                viewMode === 'list' 
-                  ? 'bg-indigo-600 text-white' 
+                viewMode === 'list'
+                  ? 'bg-blue-600 text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-50'
               } transition-colors`}
             >
@@ -185,6 +189,8 @@ const BookList: React.FC<BookListProps> = ({
               onDelete={onDelete}
               onMarkAsRead={onMarkAsRead}
               onMarkAsToRead={onMarkAsToRead}
+              onViewDetails={onViewDetails}
+              onViewSummary={onViewSummary}
             />
           ))}
         </div>
@@ -208,7 +214,7 @@ const BookList: React.FC<BookListProps> = ({
             {!searchTerm && !filterGenre && (
               <button
                 onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'add' }))}
-                className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
               >
                 Add Your First Book
               </button>
