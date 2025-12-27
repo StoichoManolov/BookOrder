@@ -18,6 +18,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
     status: 'to-read' as 'to-read' | 'read',
     rating: 0,
     summary: '',
+    quotes: '',
     dateRead: '',
     imageUrl: '',
   });
@@ -34,6 +35,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
         status: book.status,
         rating: book.rating || 0,
         summary: book.summary || '',
+        quotes: book.quotes || '',
         dateRead: book.dateRead || '',
         imageUrl: book.imageUrl || '',
       });
@@ -67,6 +69,7 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
       status: formData.status,
       rating: formData.status === 'read' && formData.rating > 0 ? formData.rating : undefined,
       summary: formData.summary.trim() || undefined,
+      quotes: formData.quotes.trim() || undefined,
       dateRead: formData.status === 'read' && formData.dateRead ? formData.dateRead : undefined,
       dateReadTimestamp: formData.status === 'read' && !book?.dateReadTimestamp ? new Date().toISOString() : book?.dateReadTimestamp,
       imageUrl: formData.imageUrl || undefined,
@@ -236,6 +239,22 @@ const BookForm: React.FC<BookFormProps> = ({ book, onSubmit, onCancel }) => {
               />
               <p className="mt-1 text-xs text-gray-500">
                 Add your thoughts, key takeaways, or a detailed synopsis. No character limit.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Quotes (optional)
+              </label>
+              <textarea
+                value={formData.quotes}
+                onChange={(e) => setFormData({ ...formData, quotes: e.target.value })}
+                rows={6}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-serif leading-relaxed"
+                placeholder="Add your favorite quotes from this book... Each quote on a new line"
+              />
+              <p className="mt-1 text-xs text-gray-500">
+                Add memorable quotes, one per line. They will be displayed beautifully in the quotes view.
               </p>
             </div>
 

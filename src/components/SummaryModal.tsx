@@ -24,7 +24,7 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ book, onClose }) => {
           </button>
         </div>
 
-        <div className="p-6">
+        <div className="p-8">
           <div className="mb-6">
             <div className="flex items-start space-x-4">
               <div className="p-3 bg-blue-100 rounded-lg">
@@ -40,9 +40,11 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ book, onClose }) => {
           <div className="border-t border-gray-200 pt-6">
             {book.summary ? (
               <div className="prose prose-lg max-w-none">
-                <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
-                  {book.summary}
-                </p>
+                <div className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-lg border border-gray-200 shadow-sm">
+                  <p className="text-gray-800 text-lg leading-relaxed whitespace-pre-wrap font-serif">
+                    {book.summary}
+                  </p>
+                </div>
               </div>
             ) : (
               <div className="text-center py-12">
@@ -54,7 +56,7 @@ const SummaryModal: React.FC<SummaryModalProps> = ({ book, onClose }) => {
             )}
           </div>
 
-          <div className="flex justify-end pt-6 border-t border-gray-200 mt-6">
+          <div className="flex justify-end pt-6 border-t border-gray-200 mt-8">
             <button
               onClick={onClose}
               className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"

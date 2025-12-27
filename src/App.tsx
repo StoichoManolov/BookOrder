@@ -7,6 +7,7 @@ import BookList from './components/BookList';
 import BookForm from './components/BookForm';
 import BookDetails from './components/BookDetails';
 import SummaryModal from './components/SummaryModal';
+import QuotesModal from './components/QuotesModal';
 
 function App() {
   const { books, addBook, updateBook, deleteBook, markAsRead, markAsToRead } = useBooks();
@@ -14,6 +15,7 @@ function App() {
   const [editingBook, setEditingBook] = useState<Book | null>(null);
   const [viewingBook, setViewingBook] = useState<Book | null>(null);
   const [viewingSummary, setViewingSummary] = useState<Book | null>(null);
+  const [viewingQuotes, setViewingQuotes] = useState<Book | null>(null);
 
   // Calculate book counts for navigation
   const bookCounts = {
@@ -56,6 +58,10 @@ function App() {
     setViewingSummary(book);
   };
 
+  const handleViewQuotes = (book: Book) => {
+    setViewingQuotes(book);
+  };
+
   // Listen for navigation events from components
   React.useEffect(() => {
     const handleNavigate = (event: any) => {
@@ -89,9 +95,10 @@ function App() {
             onMarkAsToRead={markAsToRead}
             onViewDetails={handleViewDetails}
             onViewSummary={handleViewSummary}
+            onViewQuotes={handleViewQuotes}
           />
         );
-      
+
       case 'to-read':
         return (
           <BookList
@@ -104,9 +111,10 @@ function App() {
             onMarkAsToRead={markAsToRead}
             onViewDetails={handleViewDetails}
             onViewSummary={handleViewSummary}
+            onViewQuotes={handleViewQuotes}
           />
         );
-      
+
       case 'read':
         return (
           <BookList
@@ -119,6 +127,7 @@ function App() {
             onMarkAsToRead={markAsToRead}
             onViewDetails={handleViewDetails}
             onViewSummary={handleViewSummary}
+            onViewQuotes={handleViewQuotes}
           />
         );
       
@@ -170,6 +179,13 @@ function App() {
         <SummaryModal
           book={viewingSummary}
           onClose={() => setViewingSummary(null)}
+        />
+      )}
+
+      {viewingQuotes && (
+        <QuotesModal
+          book={viewingQuotes}
+          onClose={() => setViewingQuotes(null)}
         />
       )}
     </div>

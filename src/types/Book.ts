@@ -7,6 +7,7 @@ export interface Book {
   status: 'to-read' | 'read';
   rating?: number;
   summary?: string;
+  quotes?: string;
   dateAdded: string;
   dateRead?: string;
   dateReadTimestamp?: string;

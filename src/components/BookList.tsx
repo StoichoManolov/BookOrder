@@ -13,6 +13,7 @@ interface BookListProps {
   onMarkAsToRead: (id: string) => void;
   onViewDetails?: (book: Book) => void;
   onViewSummary?: (book: Book) => void;
+  onViewQuotes?: (book: Book) => void;
 }
 
 const BookList: React.FC<BookListProps> = ({
@@ -25,6 +26,7 @@ const BookList: React.FC<BookListProps> = ({
   onMarkAsToRead,
   onViewDetails,
   onViewSummary,
+  onViewQuotes,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState('dateAdded');
@@ -191,6 +193,7 @@ const BookList: React.FC<BookListProps> = ({
               onMarkAsToRead={onMarkAsToRead}
               onViewDetails={onViewDetails}
               onViewSummary={onViewSummary}
+              onViewQuotes={onViewQuotes}
             />
           ))}
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Calendar, BookOpen, User, Tag, FileText, Star, CheckCircle, Clock } from 'lucide-react';
+import { X, Calendar, BookOpen, User, Tag, FileText, Star, CheckCircle, Clock, Quote } from 'lucide-react';
 import { Book } from '../types/Book';
 
 interface BookDetailsProps {
@@ -158,6 +158,27 @@ const BookDetails: React.FC<BookDetailsProps> = ({ book, onClose, onEdit }) => {
                     <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
                       {book.summary}
                     </p>
+                  </div>
+                </div>
+              )}
+
+              {book.quotes && (
+                <div className="mt-6">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <Quote className="h-5 w-5 text-green-600" />
+                    <h3 className="text-lg font-semibold text-gray-900">Quotes</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {book.quotes.split('\n').filter(q => q.trim()).map((quote, index) => (
+                      <div
+                        key={index}
+                        className="pl-4 border-l-4 border-green-500 py-2"
+                      >
+                        <p className="text-gray-700 leading-relaxed italic font-serif">
+                          "{quote.trim()}"
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
